@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <h1>et ça marche..{#{ value }#}</h1>
+    <p>
+        Lien vers le <a href="{{ path('form') }}">formulaire</a>.
+    </p>
+    {{ dump(projet) }}
+
+    <table class="table table-hover mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Descr</th>
+                <th scope="col">Date déb</th>
+                <th scope="col">Date fin</th>
+                <th scope="col">Avancement</th>
+                <th scope="col">Parent</th>
+                <th scope="col">Id util</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for data in projet %}
+                                    
+                <tr>
+                    <th scope="row">{{ data.idProjet }}</th>       
+                    <td>{{ data.nomProjet }}</td>
+                    <td>{{ data.descr }}</td>
+                    <td>{{ data.dateDeb|date("d/m/Y") }}</td>
+                    <td>{{ data.dateFin|date("d/m/Y") }}</td>
+                    <td>{{ data.avancement }}</td>
+                    <td>{{ data.parent }}</td>
+                    <td>{{ data.idUtil }}</td>
+                </tr>
+
+            {% endfor %}
+                                        
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    {{ form(form) }}
+    {{ dump(avancement) }}
+    
+    Résulat : 
+    {{ dump(result) }}
+    
+    {% if (result is defined) %}
+        <table class="table table-hover mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Descr</th>
+                <th scope="col">Date déb</th>
+                <th scope="col">Date fin</th>
+                <th scope="col">Avancement</th>
+                <th scope="col">Parent</th>
+                <th scope="col">Id util</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for data in result %}
+                                    
+                <tr>
+                    <th scope="row">{{ data.idProjet }}</th>       
+                    <td>{{ data.nomProjet }}</td>
+                    <td>{{ data.descr }}</td>
+                    <td>{{ data.dateDeb|date("d/m/Y") }}</td>
+                    <td>{{ data.dateFin|date("d/m/Y") }}</td>
+                    <td>{{ data.avancement }}</td>
+                    <td>{{ data.parent }}</td>
+                    <td>{{ data.idUtil }}</td>
+                </tr>
+
+            {% endfor %}
+                                        
+        </tbody>
+    </table> 
+        
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var avancementArray = {{ avancement|json_encode|raw }};
+
+        for (var i = 0; i<avancementArray.length; i++ ) {
+            document.getElementById('projet_avancement').options[i].text = avancementArray[i];
+        };
+
+        var parentArray = {{ parent|json_encode|raw }};
+
+        for (var i = 0; i<parentArray.length; i++ ) {
+            document.getElementById('projet_parent').options[i].text = parentArray[i];
+        };
+
+        
+        
+    </script>
+
+{% endblock %}
