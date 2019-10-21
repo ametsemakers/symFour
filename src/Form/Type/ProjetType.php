@@ -51,7 +51,7 @@ class ProjetType extends AbstractType //implements DataMapperInterface
             ->add('avancement', ChoiceType::class, [
                 'choices' => $options['avancement'],
             ])
-            ->add('Chercher', SubmitType::class)
+            ->add('chercher', SubmitType::class)
             //->setDataMapper($this)
         ;
     }
